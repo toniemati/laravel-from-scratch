@@ -23,23 +23,28 @@ class Customer extends Model
         'active' => 1
     ];
 
-    public function getActiveAttribute($attribute) {
+    public function getActiveAttribute($attribute)
+    {
         return $this->activeOptions()[$attribute];
     }
 
-    public function scopeActive($query) {
+    public function scopeActive($query)
+    {
         return $query->where('active', 1);
     }
 
-    public function scopeInactive($query) {
+    public function scopeInactive($query)
+    {
         return $query->where('active', 0);
     }
 
-    public function company() {
+    public function company()
+    {
         return $this->belongsTo(Company::class);
     }
 
-    public function activeOptions() {
+    public function activeOptions()
+    {
         return [
             1 => 'Active',
             0 => 'Inactive',

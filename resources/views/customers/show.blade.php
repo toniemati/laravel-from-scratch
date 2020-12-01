@@ -31,7 +31,7 @@
     @if ($customer->image)
         <div class="row">
             <div class="col-12">
-                <img src="{{asset('storage/'.$customer->image)}}" alt="user pic" class="img-thumbnail w-50">
+                <img src="{{asset('storage/'.$customer->image)}}" alt="user pic" class="img-thumbnail">
             </div>
         </div>
     @endif

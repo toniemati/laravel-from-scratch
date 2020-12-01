@@ -21,7 +21,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = Customer::all();
+        $customers = Customer::with('company')->simplePaginate(12);
 
         return view('customers.index', compact('customers'));
     }
@@ -47,6 +47,8 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Customer::class);
+
         $customer = Customer::create($this->validateRequests($request));
 
         $this->storeImage($customer, $request);
@@ -64,6 +66,8 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
+        $this->authorize('show', $customer);
+
         return view('customers.show', compact('customer'));
     }
 
@@ -104,6 +108,8 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
+        $this->authorize('delete', $customer);
+
         $customer->delete();
 
         return redirect('/customers');
